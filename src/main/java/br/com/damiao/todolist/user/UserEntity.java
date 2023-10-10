@@ -1,25 +1,31 @@
 package br.com.damiao.todolist.user;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import lombok.Data;
+
+@Data
+@Entity(name = "tb_users")
 public class UserEntity {
+
+    @Id
+    @GeneratedValue(generator = "UUID")
+    private UUID id;
+
+    @Column(unique = true, nullable = false)
     private String username;
+
     private String name;
+
     private String password;
 
-    UserEntity(String username, String name, String password){
-        this.username = username;
-        this.name = name;
-        this.password = password;
-    }
-
-    public String getUsername() {
-        return this.username;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 }
