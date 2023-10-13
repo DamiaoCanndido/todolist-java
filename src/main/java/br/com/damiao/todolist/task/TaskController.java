@@ -27,11 +27,6 @@ public class TaskController {
     
     @PostMapping("")
     public ResponseEntity create(@RequestBody TaskEntity taskEntity, HttpServletRequest request){
-        if (taskEntity.getTitle().length() > 50) {
-            return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body("very long title.");
-        }
         var currentDate = LocalDateTime.now();
         if (currentDate.isAfter(taskEntity.getStartAt()) || currentDate.isAfter(taskEntity.getEndAt())) {
             return ResponseEntity
